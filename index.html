@@ -1,0 +1,109 @@
+<!-- ===================================================== --><!-- CLOUDLFARE / GITHUB PAGES STATIC TENDER UI (NO BLOGGER) --><!-- Clean • Fast • SEO Ready • API Powered --><!-- Save as index.html --><!-- ===================================================== --><!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Latest Government Tenders India</title>
+  <meta name="description" content="Live government tenders across India. Civil, electrical, transport and IT tenders updated daily." />  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">  <style>
+    body{font-family:Inter,Arial;margin:0;background:#f5f7fb;color:#222}
+    .wrap{max-width:1200px;margin:auto;padding:20px}
+
+    .header{background:linear-gradient(135deg,#0f172a,#1e293b);color:#fff;padding:25px;border-radius:16px;margin-bottom:20px}
+    .header h1{margin:0;font-size:26px}
+    .sub{opacity:.8;font-size:14px;margin-top:5px}
+
+    .stats{display:flex;gap:12px;margin-top:15px}
+    .box{background:#fff;color:#111;padding:10px 18px;border-radius:10px;font-size:13px}
+    .box b{font-size:18px;display:block}
+
+    .filters{display:flex;flex-wrap:wrap;gap:8px;margin:20px 0}
+    .btn{padding:7px 14px;border-radius:6px;border:1px solid #ddd;background:#fff;cursor:pointer;font-size:13px}
+    .btn.active{background:#0ea5e9;color:#fff;border:none}
+
+    .search{margin-bottom:15px}
+    .search input{width:100%;padding:12px;border-radius:8px;border:1px solid #ccc}
+
+    .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:15px}
+
+    .card{background:#fff;padding:16px;border-radius:12px;box-shadow:0 6px 15px rgba(0,0,0,.05)}
+    .title{font-weight:600;font-size:15px;margin-bottom:8px}
+    .meta{font-size:12px;color:#666;margin-bottom:8px}
+    .desc{font-size:13px;margin-bottom:10px}
+    .bottom{display:flex;justify-content:space-between;align-items:center}
+
+    .price{font-weight:700;color:#0f766e}
+    .link{background:#0ea5e9;color:#fff;text-decoration:none;padding:6px 10px;border-radius:6px;font-size:12px}
+
+    .footer{text-align:center;margin-top:30px;font-size:12px;color:#777}
+
+    @media(max-width:600px){.header h1{font-size:20px}}
+  </style></head><body>
+  <div class="wrap"><div class="header">
+  <h1>Government Tenders India</h1>
+  <div class="sub">Live tenders updated automatically • Pan India</div>
+  <div class="stats">
+    <div class="box"><b id="total">0</b>Total</div>
+    <div class="box"><b id="states">0</b>Locations</div>
+  </div>
+</div>
+
+<div class="search">
+  <input id="search" placeholder="Search tenders..." oninput="render()" />
+</div>
+
+<div class="filters">
+  <div class="btn active" onclick="setCat('all',this)">All</div>
+  <div class="btn" onclick="setCat('Civil',this)">Civil</div>
+  <div class="btn" onclick="setCat('Electrical',this)">Electrical</div>
+  <div class="btn" onclick="setCat('Transport',this)">Transport</div>
+  <div class="btn" onclick="setCat('IT',this)">IT</div>
+</div>
+
+<div id="grid" class="grid"></div>
+
+<div class="footer">Auto updated via GitHub API</div>
+
+  </div><script>
+const API = "https://cdn.jsdelivr.net/gh/YOUR-USERNAME/tender-data/tenders.json";
+let DATA = [];
+let CAT = 'all';
+
+fetch(API)
+  .then(r=>r.json())
+  .then(res=>{
+    const today = new Date();
+    DATA = res.data.filter(t => new Date(t.expiry) > today);
+
+    document.getElementById('total').innerText = DATA.length;
+    document.getElementById('states').innerText = new Set(DATA.map(t=>t.district)).size;
+
+    render();
+  });
+
+function setCat(cat,el){
+  CAT = cat;
+  document.querySelectorAll('.btn').forEach(b=>b.classList.remove('active'));
+  el.classList.add('active');
+  render();
+}
+
+function render(){
+  const q = document.getElementById('search').value.toLowerCase();
+  let list = DATA;
+
+  if(CAT !== 'all') list = list.filter(t=>t.category===CAT);
+  if(q) list = list.filter(t=>t.title.toLowerCase().includes(q));
+
+  document.getElementById('grid').innerHTML = list.map(t=>`
+    <div class="card">
+      <div class="title">${t.title}</div>
+      <div class="meta">${t.district==='India'?'Pan India':t.district} • ${t.category}</div>
+      <div class="desc">${t.summary}</div>
+      <div class="bottom">
+        <div class="price">${t.value || '-'}</div>
+        <a class="link" href="${t.link}" target="_blank">View</a>
+      </div>
+    </div>
+  `).join('');
+}
+</script></body>
+</html>
