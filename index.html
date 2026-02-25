@@ -1,109 +1,606 @@
-<!-- ===================================================== --><!-- CLOUDLFARE / GITHUB PAGES STATIC TENDER UI (NO BLOGGER) --><!-- Clean • Fast • SEO Ready • API Powered --><!-- Save as index.html --><!-- ===================================================== --><!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Latest Government Tenders India</title>
-  <meta name="description" content="Live government tenders across India. Civil, electrical, transport and IT tenders updated daily." />  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">  <style>
-    body{font-family:Inter,Arial;margin:0;background:#f5f7fb;color:#222}
-    .wrap{max-width:1200px;margin:auto;padding:20px}
+  <title>Government Tenders India – Live Tender Aggregator</title>
 
-    .header{background:linear-gradient(135deg,#0f172a,#1e293b);color:#fff;padding:25px;border-radius:16px;margin-bottom:20px}
-    .header h1{margin:0;font-size:26px}
-    .sub{opacity:.8;font-size:14px;margin-top:5px}
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="Find live government tenders across India. Search, filter and track civil, electrical, IT, healthcare and infrastructure tenders updated daily." />
+  <meta name="keywords" content="government tenders india, e-procurement, gem tenders, cppp tenders, civil tenders, IT tenders, infrastructure tenders" />
+  <meta name="robots" content="index, follow" />
+  <meta name="author" content="Government Tenders India" />
+  <link rel="canonical" href="https://yourdomain.com/" />
 
-    .stats{display:flex;gap:12px;margin-top:15px}
-    .box{background:#fff;color:#111;padding:10px 18px;border-radius:10px;font-size:13px}
-    .box b{font-size:18px;display:block}
+  <!-- OpenGraph -->
+  <meta property="og:title" content="Government Tenders India – Live Tender Aggregator" />
+  <meta property="og:description" content="Search and track live government tenders across India updated daily." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://yourdomain.com/" />
+  <meta property="og:image" content="https://yourdomain.com/og-image.png" />
 
-    .filters{display:flex;flex-wrap:wrap;gap:8px;margin:20px 0}
-    .btn{padding:7px 14px;border-radius:6px;border:1px solid #ddd;background:#fff;cursor:pointer;font-size:13px}
-    .btn.active{background:#0ea5e9;color:#fff;border:none}
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Government Tenders India" />
+  <meta name="twitter:description" content="Live government tenders across India updated daily." />
 
-    .search{margin-bottom:15px}
-    .search input{width:100%;padding:12px;border-radius:8px;border:1px solid #ccc}
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "GovernmentService",
+    "name": "Government Tenders India",
+    "description": "Aggregates government tenders from across India for procurement and bidding.",
+    "provider": { "@type": "Organization", "name": "Government Tenders India" },
+    "serviceType": "Tender Aggregation",
+    "areaServed": { "@type": "Country", "name": "India" }
+  }
+  </script>
 
-    .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:15px}
+  <!-- Preconnect for fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
 
-    .card{background:#fff;padding:16px;border-radius:12px;box-shadow:0 6px 15px rgba(0,0,0,.05)}
-    .title{font-weight:600;font-size:15px;margin-bottom:8px}
-    .meta{font-size:12px;color:#666;margin-bottom:8px}
-    .desc{font-size:13px;margin-bottom:10px}
-    .bottom{display:flex;justify-content:space-between;align-items:center}
+  <style>
+    /* ===== RESET & BASE ===== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #f0f2f7;
+      --surface: #ffffff;
+      --surface2: #f8f9fc;
+      --border: #e4e8f0;
+      --text: #0f172a;
+      --text2: #475569;
+      --text3: #94a3b8;
+      --accent: #1d4ed8;
+      --accent2: #3b82f6;
+      --accent-light: #eff6ff;
+      --green: #059669;
+      --green-light: #ecfdf5;
+      --orange: #d97706;
+      --orange-light: #fffbeb;
+      --red: #dc2626;
+      --red-light: #fef2f2;
+      --header-grad: linear-gradient(135deg, #0f172a 0%, #1e3a8a 50%, #1d4ed8 100%);
+      --shadow-sm: 0 1px 3px rgba(0,0,0,.08), 0 1px 2px rgba(0,0,0,.05);
+      --shadow: 0 4px 16px rgba(0,0,0,.08), 0 1px 4px rgba(0,0,0,.04);
+      --shadow-lg: 0 12px 32px rgba(0,0,0,.12), 0 2px 8px rgba(0,0,0,.06);
+      --radius: 12px;
+      --radius-sm: 8px;
+      --radius-pill: 999px;
+      --font: 'Sora', sans-serif;
+      --mono: 'JetBrains Mono', monospace;
+      --transition: 220ms cubic-bezier(.4,0,.2,1);
+    }
+    [data-theme="dark"] {
+      --bg: #070d1a;
+      --surface: #0f1a2e;
+      --surface2: #131f33;
+      --border: #1e2d45;
+      --text: #e2e8f0;
+      --text2: #94a3b8;
+      --text3: #475569;
+      --accent-light: #1e3a8a22;
+      --green-light: #05966911;
+      --orange-light: #d9770611;
+      --red-light: #dc262611;
+      --header-grad: linear-gradient(135deg, #030712 0%, #0f1f40 50%, #1d3a7a 100%);
+      --shadow-sm: 0 1px 3px rgba(0,0,0,.3);
+      --shadow: 0 4px 16px rgba(0,0,0,.3);
+      --shadow-lg: 0 12px 32px rgba(0,0,0,.4);
+    }
 
-    .price{font-weight:700;color:#0f766e}
-    .link{background:#0ea5e9;color:#fff;text-decoration:none;padding:6px 10px;border-radius:6px;font-size:12px}
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+      transition: background var(--transition), color var(--transition);
+    }
 
-    .footer{text-align:center;margin-top:30px;font-size:12px;color:#777}
+    /* ===== HEADER ===== */
+    .site-header {
+      background: var(--header-grad);
+      color: #fff;
+      padding: 0;
+      position: relative;
+      overflow: hidden;
+    }
+    .site-header::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      pointer-events: none;
+    }
+    .header-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 36px 20px 28px;
+      position: relative;
+    }
+    .header-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .header-brand { display: flex; align-items: center; gap: 14px; }
+    .brand-icon {
+      width: 48px; height: 48px;
+      background: linear-gradient(135deg, #60a5fa, #a78bfa);
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 22px; flex-shrink: 0;
+      box-shadow: 0 4px 16px rgba(96,165,250,.35);
+    }
+    .header-title-group { }
+    h1.site-title {
+      font-size: clamp(1.4rem, 4vw, 2rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+    }
+    .site-subtitle {
+      font-size: 0.85rem;
+      color: rgba(255,255,255,.65);
+      margin-top: 2px;
+      display: flex; align-items: center; gap: 6px;
+    }
+    .live-dot {
+      width: 7px; height: 7px;
+      background: #4ade80;
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+      flex-shrink: 0;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: .6; transform: scale(.8); }
+    }
+    .header-actions { display: flex; align-items: center; gap: 10px; margin-top: 4px; }
+    .btn-dark-toggle {
+      background: rgba(255,255,255,.1);
+      border: 1px solid rgba(255,255,255,.2);
+      color: #fff;
+      border-radius: var(--radius-pill);
+      padding: 7px 16px;
+      font-size: 0.8rem;
+      font-family: var(--font);
+      cursor: pointer;
+      transition: var(--transition);
+      display: flex; align-items: center; gap: 6px;
+    }
+    .btn-dark-toggle:hover { background: rgba(255,255,255,.2); }
 
-    @media(max-width:600px){.header h1{font-size:20px}}
-  </style></head><body>
-  <div class="wrap"><div class="header">
-  <h1>Government Tenders India</h1>
-  <div class="sub">Live tenders updated automatically • Pan India</div>
-  <div class="stats">
-    <div class="box"><b id="total">0</b>Total</div>
-    <div class="box"><b id="states">0</b>Locations</div>
+    /* Stats bar */
+    .stats-bar {
+      display: flex; gap: 24px; flex-wrap: wrap;
+      margin-top: 28px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255,255,255,.12);
+    }
+    .stat-item { }
+    .stat-num {
+      font-size: 1.6rem;
+      font-weight: 700;
+      font-variant-numeric: tabular-nums;
+      letter-spacing: -0.02em;
+      line-height: 1;
+    }
+    .stat-label {
+      font-size: 0.72rem;
+      color: rgba(255,255,255,.55);
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      margin-top: 2px;
+    }
+    .stat-divider {
+      width: 1px;
+      background: rgba(255,255,255,.12);
+      align-self: stretch;
+    }
+
+    /* ===== AD BANNER – TOP ===== */
+    .ad-top {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      text-align: center;
+      padding: 10px 20px;
+      font-size: 0.75rem;
+      color: var(--text3);
+    }
+    .ad-placeholder {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 100%; max-width: 728px; height: 90px;
+      border: 1.5px dashed var(--border);
+      border-radius: var(--radius-sm);
+      color: var(--text3);
+      font-size: 0.7rem;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      background: var(--surface2);
+    }
+    .ad-placeholder-mid {
+      width: 100%; height: 100px;
+      border: 1.5px dashed var(--border);
+      border-radius: var(--radius);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--text3);
+      font-size: 0.7rem;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      background: var(--surface2);
+      margin: 4px 0;
+    }
+
+    /* ===== MAIN LAYOUT ===== */
+    .main-wrap {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 28px 16px 48px;
+    }
+
+    /* ===== SEARCH + FILTERS ===== */
+    .controls-bar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--bg);
+      padding: 14px 0 10px;
+      margin-bottom: 20px;
+      transition: background var(--transition);
+    }
+    .search-wrap {
+      position: relative;
+      margin-bottom: 12px;
+    }
+    .search-icon {
+      position: absolute;
+      left: 14px; top: 50%;
+      transform: translateY(-50%);
+      color: var(--text3);
+      pointer-events: none;
+      font-size: 1rem;
+    }
+    #searchInput {
+      width: 100%;
+      padding: 13px 16px 13px 42px;
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-pill);
+      font-family: var(--font);
+      font-size: 0.9rem;
+      background: var(--surface);
+      color: var(--text);
+      box-shadow: var(--shadow-sm);
+      transition: border-color var(--transition), box-shadow var(--transition), background var(--transition);
+      outline: none;
+    }
+    #searchInput:focus {
+      border-color: var(--accent2);
+      box-shadow: 0 0 0 3px rgba(59,130,246,.15), var(--shadow-sm);
+    }
+    #searchInput::placeholder { color: var(--text3); }
+
+    .filter-chips {
+      display: flex; gap: 8px; flex-wrap: wrap;
+    }
+    .chip {
+      padding: 6px 14px;
+      border-radius: var(--radius-pill);
+      font-size: 0.78rem;
+      font-weight: 500;
+      font-family: var(--font);
+      cursor: pointer;
+      border: 1.5px solid var(--border);
+      background: var(--surface);
+      color: var(--text2);
+      transition: var(--transition);
+      white-space: nowrap;
+    }
+    .chip:hover { border-color: var(--accent2); color: var(--accent); background: var(--accent-light); }
+    .chip.active {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+      box-shadow: 0 2px 8px rgba(29,78,216,.3);
+    }
+
+    /* ===== RESULTS INFO ===== */
+    .results-info {
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 8px;
+      margin-bottom: 16px;
+      font-size: 0.82rem;
+      color: var(--text2);
+    }
+    .results-count strong { color: var(--text); }
+    .sort-btn {
+      background: var(--surface);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 5px 12px;
+      font-size: 0.78rem;
+      font-family: var(--font);
+      color: var(--text2);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    .sort-btn:hover { border-color: var(--accent2); color: var(--accent); }
+
+    /* ===== TENDER GRID ===== */
+    #tendersGrid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 16px;
+    }
+
+    /* ===== TENDER CARD ===== */
+    .tender-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      box-shadow: var(--shadow-sm);
+      transition: box-shadow var(--transition), transform var(--transition), border-color var(--transition), background var(--transition);
+      animation: fadeUp .35s ease both;
+      will-change: transform;
+    }
+    .tender-card:hover {
+      box-shadow: var(--shadow-lg);
+      transform: translateY(-3px);
+      border-color: rgba(59,130,246,.3);
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .card-header { display: flex; align-items: flex-start; gap: 10px; }
+    .card-badge {
+      display: inline-flex; align-items: center;
+      padding: 3px 9px;
+      border-radius: var(--radius-pill);
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .badge-civil     { background: #dbeafe; color: #1d4ed8; }
+    .badge-electrical{ background: #fef9c3; color: #854d0e; }
+    .badge-transport { background: #fce7f3; color: #9d174d; }
+    .badge-it        { background: #f0fdf4; color: #166534; }
+    .badge-healthcare{ background: #fdf4ff; color: #6b21a8; }
+    .badge-infrastructure { background: #fff7ed; color: #9a3412; }
+    .badge-other     { background: var(--surface2); color: var(--text2); }
+    [data-theme="dark"] .badge-civil      { background: #1e3a8a33; color: #93c5fd; }
+    [data-theme="dark"] .badge-electrical { background: #713f1222; color: #fde68a; }
+    [data-theme="dark"] .badge-transport  { background: #9d174d22; color: #f9a8d4; }
+    [data-theme="dark"] .badge-it         { background: #14532d22; color: #86efac; }
+    [data-theme="dark"] .badge-healthcare { background: #581c8722; color: #d8b4fe; }
+    [data-theme="dark"] .badge-infrastructure { background: #7c2d1222; color: #fdba74; }
+    [data-theme="dark"] .badge-other      { background: var(--surface2); color: var(--text2); }
+
+    .card-source {
+      font-size: 0.7rem;
+      color: var(--text3);
+      font-family: var(--mono);
+      margin-left: auto;
+      white-space: nowrap;
+    }
+
+    .card-title {
+      font-size: 0.92rem;
+      font-weight: 600;
+      line-height: 1.4;
+      color: var(--text);
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .card-location {
+      display: flex; align-items: center; gap: 5px;
+      font-size: 0.78rem;
+      color: var(--text2);
+    }
+    .card-location svg { flex-shrink: 0; }
+
+    .card-summary {
+      font-size: 0.8rem;
+      color: var(--text2);
+      line-height: 1.55;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      flex: 1;
+    }
+
+    .card-meta {
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 8px;
+      padding-top: 12px;
+      border-top: 1px solid var(--border);
+    }
+    .card-value {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--green);
+      font-family: var(--mono);
+    }
+    .card-value.no-value { color: var(--text3); font-weight: 400; font-size: 0.8rem; }
+
+    .card-expiry {
+      font-size: 0.72rem;
+      display: flex; align-items: center; gap: 4px;
+    }
+    .expiry-soon { color: var(--orange); }
+    .expiry-ok   { color: var(--text3); }
+
+    .btn-view {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 9px 18px;
+      background: var(--accent);
+      color: #fff;
+      text-decoration: none;
+      border-radius: var(--radius-sm);
+      font-size: 0.8rem;
+      font-weight: 600;
+      font-family: var(--font);
+      transition: var(--transition);
+      letter-spacing: .01em;
+      width: 100%;
+      justify-content: center;
+    }
+    .btn-view:hover { background: #1e40af; box-shadow: 0 4px 14px rgba(29,78,216,.4); transform: translateY(-1px); }
+    .btn-view:active { transform: translateY(0); }
+
+    /* ===== SKELETON LOADER ===== */
+    .skeleton-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 16px;
+    }
+    .skeleton-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+      display: flex; flex-direction: column; gap: 14px;
+    }
+    .skel {
+      background: linear-gradient(90deg, var(--surface2) 25%, var(--border) 50%, var(--surface2) 75%);
+      background-size: 200% 100%;
+      border-radius: 6px;
+      animation: shimmer 1.5s infinite;
+    }
+    @keyframes shimmer {
+      0%   { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+    .skel-h { height: 12px; }
+    .skel-lg { height: 18px; width: 70%; }
+    .skel-sm { height: 10px; width: 45%; }
+
+    /* ===== EMPTY / ERROR ===== */
+    .state-box {
+      grid-column: 1/-1;
+      text-align: center;
+      padding: 64px 20px;
+      color: var(--text2);
+    }
+    .state-box .icon { font-size: 3rem; margin-bottom: 12px; opacity: .5; }
+    .state-box h2 { font-size: 1.1rem; font-weight: 600; color: var(--text); margin-bottom: 6px; }
+    .state-box p  { font-size: 0.85rem; color: var(--text2); }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      text-align: center;
+      padding: 28px 16px 20px;
+      font-size: 0.78rem;
+      color: var(--text3);
+      transition: background var(--transition);
+    }
+    .footer-ad {
+      margin: 0 auto 16px;
+      max-width: 728px;
+    }
+    .ad-placeholder-footer {
+      width: 100%; height: 90px;
+      border: 1.5px dashed var(--border);
+      border-radius: var(--radius-sm);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--text3);
+      font-size: 0.7rem;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      background: var(--surface2);
+    }
+    .footer-links { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin-bottom: 10px; }
+    .footer-links a { color: var(--text2); text-decoration: none; transition: color var(--transition); }
+    .footer-links a:hover { color: var(--accent2); }
+
+    /* ===== BACK TO TOP ===== */
+    #backTop {
+      position: fixed; bottom: 24px; right: 24px;
+      width: 42px; height: 42px;
+      background: var(--accent);
+      color: #fff;
+      border: none; border-radius: 50%;
+      font-size: 1.1rem;
+      cursor: pointer;
+      box-shadow: var(--shadow);
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; transform: translateY(20px);
+      transition: opacity .3s, transform .3s;
+      pointer-events: none;
+    }
+    #backTop.show { opacity: 1; transform: translateY(0); pointer-events: auto; }
+    #backTop:hover { background: #1e40af; }
+
+    /* ===== LAST UPDATED CHIP ===== */
+    .updated-chip {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: rgba(255,255,255,.1);
+      border: 1px solid rgba(255,255,255,.15);
+      border-radius: var(--radius-pill);
+      padding: 4px 12px;
+      font-size: 0.72rem;
+      color: rgba(255,255,255,.7);
+      font-family: var(--mono);
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 640px) {
+      .header-inner { padding: 24px 14px 20px; }
+      .stat-num { font-size: 1.3rem; }
+      .stats-bar { gap: 16px; }
+      #tendersGrid, .skeleton-grid { grid-template-columns: 1fr; }
+      .controls-bar { padding: 10px 0 8px; }
+    }
+    @media (min-width: 1024px) {
+      #tendersGrid { grid-template-columns: repeat(3, 1fr); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== TOP AD BANNER ===== -->
+  <!-- ADSENSE: Replace .ad-placeholder with your AdSense unit -->
+  <div class="ad-top">
+    <div class="ad-placeholder">Advertisement — 728×90</div>
+    <!--
+    <ins class="adsbygoogle" style="display:inline-block;width:728px;height:90px"
+         data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+         data-ad-slot="YYYYYYYYYY"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    -->
   </div>
-</div>
 
-<div class="search">
-  <input id="search" placeholder="Search tenders..." oninput="render()" />
-</div>
-
-<div class="filters">
-  <div class="btn active" onclick="setCat('all',this)">All</div>
-  <div class="btn" onclick="setCat('Civil',this)">Civil</div>
-  <div class="btn" onclick="setCat('Electrical',this)">Electrical</div>
-  <div class="btn" onclick="setCat('Transport',this)">Transport</div>
-  <div class="btn" onclick="setCat('IT',this)">IT</div>
-</div>
-
-<div id="grid" class="grid"></div>
-
-<div class="footer">Auto updated via GitHub API</div>
-
-  </div><script>
-const API = "https://cdn.jsdelivr.net/gh/securefin/tender-data/tenders.json";
-let DATA = [];
-let CAT = 'all';
-
-fetch(API)
-  .then(r=>r.json())
-  .then(res=>{
-    const today = new Date();
-    DATA = res.data.filter(t => new Date(t.expiry) > today);
-
-    document.getElementById('total').innerText = DATA.length;
-    document.getElementById('states').innerText = new Set(DATA.map(t=>t.district)).size;
-
-    render();
-  });
-
-function setCat(cat,el){
-  CAT = cat;
-  document.querySelectorAll('.btn').forEach(b=>b.classList.remove('active'));
-  el.classList.add('active');
-  render();
-}
-
-function render(){
-  const q = document.getElementById('search').value.toLowerCase();
-  let list = DATA;
-
-  if(CAT !== 'all') list = list.filter(t=>t.category===CAT);
-  if(q) list = list.filter(t=>t.title.toLowerCase().includes(q));
-
-  document.getElementById('grid').innerHTML = list.map(t=>`
-    <div class="card">
-      <div class="title">${t.title}</div>
-      <div class="meta">${t.district==='India'?'Pan India':t.district} • ${t.category}</div>
-      <div class="desc">${t.summary}</div>
-      <div class="bottom">
-        <div class="price">${t.value || '-'}</div>
-        <a class="link" href="${t.link}" target="_blank">View</a>
-      </div>
-    </div>
-  `).join('');
-}
-</script></body>
-</html>
+  <!-- ===== HEADER ===== -->
+  <header class="site-header" role="banner">
+    <div class="header-inner">
+      <div class="header-top">
+        <div class="header-brand">
+          <div class="brand-icon" aria-hidden="true">🏛️</div>
+          <div class="header-title-group">
+            <h1 class="site-title">Government Tenders India</h1>
+            <p class="site-subtitle">
+              <span class="live-dot" aria-hidden="true"></span>
+              Live tenders updated daily
+            </p>
+          </div>
+        </d
